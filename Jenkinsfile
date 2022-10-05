@@ -2,34 +2,41 @@ pipeline {
   agent {
     docker { image 'node:14.15' }
   }
-  stages {
-    stage('Install') {
-    docker.image('node:14.15').pull()
-    docker.image('malikdevops/test-docker-image').pull()
-      steps { sh 'npm install' }
-    }
-
-    stage('Test') {
-        stage('Static code analysis') {
-            steps { sh 'npm run-script lint' }
-        }
-        stage('Unit tests') {
-            steps { sh 'npm run-script test' }
+      stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
         }
     }
+  // stages {
+  //   stage('Install') {
+  //   docker.image('node:14.15').pull()
+  //   docker.image('malikdevops/test-docker-image').pull()
+  //     steps { sh 'npm install' }
+  //   }
 
-    stage('Build') {
-      docker.image('node:14.15').inside {
-        sh label:
-          'Running npm run build',
-        script: '''
-          node --version
-          cd hello-world-node
-          npm run build
-        '''
-      }
-    }
-  }
+  //   stage('Test') {
+  //       stage('Static code analysis') {
+  //           steps { sh 'npm run-script lint' }
+  //       }
+  //       stage('Unit tests') {
+  //           steps { sh 'npm run-script test' }
+  //       }
+  //   }
+
+  //   stage('Build') {
+  //     docker.image('node:14.15').inside {
+  //       sh label:
+  //         'Running npm run build',
+  //       script: '''
+  //         node --version
+  //         cd hello-world-node
+  //         npm run build
+  //       '''
+  //     }
+  //   }
+  // }
 //   stage("Deploy") {
 //     def containerName = "testdockerimage"
 //     // Any change in Volume will automatically result in Hot Reload of Nginx
