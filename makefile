@@ -10,6 +10,6 @@ test:
 docker-build:
 	docker build -t ${ORGANIZATION}/${REPOSITORY}:${TAG} .
 	
-# push:
-# 	docker login -u="${USERNAME}" -p="${PASSWORD}"
-# 	docker push ${ORGANIZATION}/${REPOSITORY}:${TAG}
+push:
+	docker login -u="${USERNAME}" -p="${PASSWORD}"
+	docker push ${ORGANIZATION}/${REPOSITORY}:${TAG}
