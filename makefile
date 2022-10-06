@@ -5,7 +5,7 @@ ORGANIZATION = "malikdevops"
 TAG = "v1.0.1"
 
 test:
-	etestdockerimagecho "testing"
+	testdockerimage "testing"
 
 docker-build:
 	docker build -t ${ORGANIZATION}/${REPOSITORY}:${TAG} .
