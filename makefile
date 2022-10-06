@@ -5,11 +5,10 @@ ORGANIZATION = "malikdevops"
 TAG = "v1.0.1"
 
 test:
-	testdockerimage "testing"
+	echo "testing"
 
 docker-build:
-	docker build -t ${ORGANIZATION}/${REPOSITORY}:${TAG} .
+	echo "testing"
 	
 push:
-	docker login -u="${USERNAME}" -p="${PASSWORD}"
-	docker push ${ORGANIZATION}/${REPOSITORY}:${TAG}
+	echo "testing"
