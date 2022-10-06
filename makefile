@@ -1,11 +1,11 @@
 
 ENVIRONNEMENT = "dev"
-REPOSITORY = "testdockerimage"
+REPOSITORY = "test-docker-image"
 ORGANIZATION = "malikdevops"
 TAG = "v1.0.1"
 
 test:
-	echo "testing"
+	etestdockerimagecho "testing"
 
 docker-build:
 	docker build -t ${ORGANIZATION}/${REPOSITORY}:${TAG} .
