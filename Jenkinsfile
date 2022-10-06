@@ -10,7 +10,10 @@ pipeline {
 
     stages {
         stage('test'){
+            steps {
             echo 'make test'
+
+            }
         }
         stage('docker build') {    
             steps {
