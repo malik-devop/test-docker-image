@@ -15,17 +15,16 @@ pipeline{
     } 
     stage('Build Docker Image'){
         steps{
-            script{         
-              docker.build(IMAGE_TAG_DEV, '.')
+            script{   
+              sh 'docker build -t testdockerimage .'      
             }
           }         
     } 
     stage('Push Image sur Dockerhub'){
         steps{
             script{
-                docker.withRegistry("", credential){
-                     docker.image(IMAGE_TAG_DEV).push()
-                    }   
+                sh 'docker tag testdockerimage malikdevops/test-docker-image:v1.0.1' 
+                sh 'docker push malikdevops/test-docker-image:v1.0.1' 
             }
         }
     }
