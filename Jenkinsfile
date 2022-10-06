@@ -18,16 +18,7 @@ pipeline {
         stage('docker build') {    
             steps {
                 script {
-                    docker.build(IMAGE_TAG, ".")
-                }
-            }
-        }
-        stage('push'){
-            steps {
-                script {
-                    docker.withRegistry("",credential){
-                        docker.image(IMAGE_TAG).push()
-                    }
+                    docker.build(IMAGE_TAG, '.')
                 }
             }
         }
