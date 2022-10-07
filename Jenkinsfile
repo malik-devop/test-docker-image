@@ -1,20 +1,34 @@
 pipeline {
     agent any
-
     stages {
-        stage('unit-tests') {
+        stage("Unit-test") {
             steps {
-                sh 'make unit-tests..'
+                echo "On a pas encore fait les tests unitaires"
             }
         }
-        stage('build-image') {
+        
+        stage("Build docker image") {
             steps {
-                sh 'make build-image'
+                echo "Execution en cours"
+                sh "docker build -t malikdevops/test-docker-image:v1.0.${BUILD_NUMBER} ."
+                script {
+                    try{
+                        sh "docker rm -f testdockerimage"
+                    }catch (exc) {
+                        echo "Echec de la suppression de l'image"
+                    }
+                }
+                sh "docker run --name testdockerimage -d -p 5000:80 malikdevops/test-docker-image:v1.0.${BUILD_NUMBER}"
+
             }
         }
-        stage('push') {
+        stage("Push docker image") {
             steps {
-                sh 'make push'
+                echo "Push de l'image dans notre registry docker hub"
+                withCredentials([usernamePassword(credentialsId : "dockerhub",passwordVariable : "DOCKER_PASSWORD" ,usernameVariable: "DOCKER_USERNAME")]){
+                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                    sh "docker push malikdevops/test-docker-image:v1.0.${BUILD_NUMBER}"
+                }
             }
         }
     }
