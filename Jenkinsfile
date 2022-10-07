@@ -10,7 +10,7 @@ pipeline {
         stage("Build docker image") {
             steps {
                 echo "Execution en cours"
-                sh "docker build -t testdockerimage ."
+                sh "docker build -t malikdevops/test-docker-image:v1.0.${BUILD_NUMBER} ."
                 script {
                     try{
                         sh "docker rm -f testdockerimage"
