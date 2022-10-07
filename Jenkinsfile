@@ -10,7 +10,7 @@ pipeline {
         stage("Build docker image") {
             steps {
                 echo "Execution en cours"
-                sh "docker build -t malikdevops/test-docker-image:v1.0.${BUILD_NUMBER} ."
+                sh "docker build -t testdockerimage ."
                 script {
                     try{
                         sh "docker rm -f testdockerimage"
@@ -18,7 +18,7 @@ pipeline {
                         echo "Echec de la suppression de l'image"
                     }
                 }
-                sh "docker run --name testdockerimage -d -p 5000:80 malikdevops/test-docker-image:v1.0.${BUILD_NUMBER}"
+                sh "docker run -d -p 5000:80 testdockerimage"
 
             }
         }
