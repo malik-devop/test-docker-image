@@ -40,7 +40,7 @@ pipeline {
     stages {
         stage('unit-tests') {
             steps {
-                sh 'make unit-tests..'
+                sh 'make unit-tests'    
             }
         }
         stage('build-image') {
